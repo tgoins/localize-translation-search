@@ -1,0 +1,14 @@
+{
+  "name": "localize-translation-search",
+  "description": "A monorepo to search for phrases and their translations.",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "author": "Tanner Goins <tanner@tannergoins.com>",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}
