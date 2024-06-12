@@ -1,0 +1,15 @@
+{
+  "name": "localize-translation-search-common",
+  "description": "Shared code between the API and web application.",
+  "private": true,
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

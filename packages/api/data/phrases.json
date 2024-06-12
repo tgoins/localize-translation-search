@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "phrase": "Hi, I’m a phrase",
+    "status": "active",
+    "createdAt": "2024-05-23T15:58:35+00:00",
+    "updatedAt": "2024-05-23T15:58:35+00:00",
+    "translations": {
+         "fr": "Salut, je suis une phrase",
+         "es": "hola soy una frase"
+    }
+  }
+]

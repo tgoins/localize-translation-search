@@ -23,6 +23,19 @@ The project requires the following tools to run:
 
 ## Setup
 
-1. Install the dependencies:
-  - Open a terminal and run `yarn install`
+1. Enable [Corepack](https://yarnpkg.com/corepack) if not yet enabled (This is included with Node.js):
+  - Open a terminal and run `corepack enable` 
 
+2. Install the dependencies:
+  - In a terminal, run `yarn install`
+
+3. Build the `common` package:
+  - In a terminal, run `cd packages/common && yarn build`
+
+4. Run the API:
+  - In a terminal, run `cd packages/api`
+  - For development:
+    - Run `yarn dev`
+  - For production:
+    - Run `yarn build && yarn start`
+  - The API should now be running at `http://locahost:3000`

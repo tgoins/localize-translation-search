@@ -8,7 +8,5 @@
   "workspaces": [
     "packages/*"
   ],
-  "scripts": {},
-  "dependencies": {},
-  "devDependencies": {}
+  "packageManager": "yarn@4.3.0"
 }
