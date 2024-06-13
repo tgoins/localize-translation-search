@@ -2,11 +2,19 @@ import * as fs from 'fs';
 import {type Phrase} from 'localize-translation-search-common';
 
 class PhraseService {
-  public async getPhraseById(id: Phrase['id']): Promise<Phrase> {
+  public async getPhraseById(id: Phrase['id']): Promise<Phrase | undefined> {
     try {
       const data = await fs.promises.readFile('data/phrases.json', 'utf-8');    
       const phrases = JSON.parse(data);
-      return phrases.find((phrase: Phrase) => phrase.id === id);
+      const phrase = phrases.find((phrase: Phrase) => phrase.id === id);
+
+      if (!phrase) {
+        return undefined;
+      }
+
+      delete phrase.translations;
+
+      return phrase;
     } catch (error) {
       console.error('Error fetching phrases:', error);
       throw error;
