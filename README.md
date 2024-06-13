@@ -50,9 +50,10 @@ The API contains unit tests using [Jest](https://jestjs.io/)
 ## API Endpoints
 
 ### Get Phrase by ID
-Retrieves a phrase object by its ID, without the translations
+Retrieves a phrase object by its ID, without the translations.
 
   - GET `/phrase/:id`
+  - Returns {Phrase}
 
 **Query Parameters:**
   - `id` (int): The ID of the phrase object
@@ -62,6 +63,7 @@ Retrieves a phrase object by its ID, without the translations
 Retrieves the translation of a phrase in a specific language.
 
   - GET `/phrase/:id/:language`
+  - Returns {string}
 
 **Query Parameters:**
   - `id` (int): The ID of the phrase object
@@ -72,6 +74,7 @@ Retrieves the translation of a phrase in a specific language.
 Retrieves phrases that match a search query and are sorted according to a specified sort order.
 
   - GET `/phrase/search`
+  - Returns {Phrase[]}
 
 **Query Parameters:**
   - `query` (string, optional): The search query for phrases.
