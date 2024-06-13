@@ -44,16 +44,29 @@ class PhraseService {
     }
   }
 
-  public async getPhrasesBySearch(query?: string | undefined): Promise<Phrase[]> {
+  public async getPhrasesBySearch(query?: string | undefined, sortKey: keyof Phrase = 'phrase', sortOrder: 'asc' | 'desc' = 'asc'): Promise<Phrase[]> {
     try {
       const data = await fs.promises.readFile('data/phrases.json', 'utf-8');
-      const phrases = JSON.parse(data);
+      const phrases = JSON.parse(data) as Phrase[];
+      const sortOrderInt = sortOrder === 'asc' ? 1 : -1;
       
       if (!query?.trim()) {
         return phrases;
       }
 
-      return phrases.filter((phrase: Phrase) => phrase.phrase.toLowerCase().includes(query?.toLowerCase()));
+      return phrases
+        .filter((phrase: Phrase) => phrase.phrase.toLowerCase().includes(query?.toLowerCase()))
+        .sort((a: Phrase, b: Phrase) => {
+          if (a[sortKey as keyof Phrase]! < b[sortKey as keyof Phrase]!) {
+            return -1 * sortOrderInt;
+          }
+
+          if (a[sortKey as keyof Phrase]! > b[sortKey as keyof Phrase]!) {
+            return 1 * sortOrderInt;
+          }
+
+          return 0;
+        });
     } catch (error) {
       console.error('Error fetching phrases:', error);
       throw error;

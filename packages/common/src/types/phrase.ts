@@ -9,4 +9,4 @@ export interface Phrase {
   translations?: {
     [key: string]: string;
   };
-  }
+}

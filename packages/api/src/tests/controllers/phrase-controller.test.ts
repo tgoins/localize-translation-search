@@ -132,7 +132,7 @@ describe('PhraseController', () => {
 
       await phraseController.getPhrasesBySearch(req, res);
 
-      expect(phraseService.getPhrasesBySearch).toHaveBeenCalledWith('hello');
+      expect(phraseService.getPhrasesBySearch).toHaveBeenCalledWith('hello', undefined, undefined);
       expect(res.json).toHaveBeenCalledWith([{ id: 1, phrase: 'Hello' }]);
     });
 
@@ -144,7 +144,7 @@ describe('PhraseController', () => {
 
       await phraseController.getPhrasesBySearch(req, res);
 
-      expect(phraseService.getPhrasesBySearch).toHaveBeenCalledWith(undefined);
+      expect(phraseService.getPhrasesBySearch).toHaveBeenCalledWith(undefined, undefined, undefined);
       expect(res.json).toHaveBeenCalledWith([{ id: 1, phrase: 'Hello' }]);
     });
 
@@ -156,9 +156,63 @@ describe('PhraseController', () => {
 
       await phraseController.getPhrasesBySearch(req, res);
 
-      expect(phraseService.getPhrasesBySearch).toHaveBeenCalledWith('hello');
+      expect(phraseService.getPhrasesBySearch).toHaveBeenCalledWith('hello', undefined, undefined);
       expect(res.status).toHaveBeenCalledWith(500);
       expect(res.json).toHaveBeenCalledWith({ error: 'Internal server error' });
+    });
+
+    it('should return an error when an invalid sort order is provided', async () => {
+      const req = { query: { query: 'hello', sort: 'phrase:invalid' } } as unknown as Request;
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+      await phraseController.getPhrasesBySearch(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Invalid sort order' });
+    });
+
+    it('should return an error when an invalid sort key is provided', async () => {
+      const req = { query: { query: 'hello', sort: 'invalid:asc' } } as unknown as Request;
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+      await phraseController.getPhrasesBySearch(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Invalid sort key' });
+    });
+
+    it('should return an error when an invalid sort is provided', async () => {
+      const req = { query: { query: 'hello', sort: 'invalid' } } as unknown as Request;
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+      await phraseController.getPhrasesBySearch(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Invalid sort format' });
+    });
+
+    it('should return the phrases sorted by the specified key in ascending order', async () => {
+      const req = { query: { query: undefined, sort: 'phrase:asc' } } as unknown as Request;
+      const res = { json: jest.fn() } as unknown as Response;
+
+      phraseService.getPhrasesBySearch = jest.fn().mockResolvedValue([{ id: 2, phrase: 'Goodbye' }, { id: 1, phrase: 'Hello' }]);
+
+      await phraseController.getPhrasesBySearch(req, res);
+
+      expect(phraseService.getPhrasesBySearch).toHaveBeenCalledWith(undefined, 'phrase', 'asc');
+      expect(res.json).toHaveBeenCalledWith([{ id: 2, phrase: 'Goodbye' }, { id: 1, phrase: 'Hello' }]);
+    });
+
+    it('should return the phrases sorted by the specified key in descending order', async () => {
+      const req = { query: { query: undefined, sort: 'phrase:desc' } } as unknown as Request;
+      const res = { json: jest.fn() } as unknown as Response;
+
+      phraseService.getPhrasesBySearch = jest.fn().mockResolvedValue([{ id: 1, phrase: 'Hello' }, { id: 2, phrase: 'Goodbye' }]);
+
+      await phraseController.getPhrasesBySearch(req, res);
+
+      expect(phraseService.getPhrasesBySearch).toHaveBeenCalledWith(undefined, 'phrase', 'desc');
+      expect(res.json).toHaveBeenCalledWith([{ id: 1, phrase: 'Hello' }, { id: 2, phrase: 'Goodbye' }]);
     });
   });
 });

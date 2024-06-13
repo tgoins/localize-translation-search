@@ -9,5 +9,27 @@
          "fr": "Salut, je suis une phrase",
          "es": "hola soy una frase"
     }
+  },
+  {
+    "id": 2,
+    "phrase": "Hi",
+    "status": "active",
+    "createdAt": "2024-05-24T15:58:35+00:00",
+    "updatedAt": "2024-05-24T15:58:35+00:00",
+    "translations": {
+         "fr": "Salut",
+         "es": "hola"
+    }
+  },
+  {
+    "id": 3,
+    "phrase": "I'm a phrase",
+    "status": "active",
+    "createdAt": "2024-05-22T15:58:35+00:00",
+    "updatedAt": "2024-05-22T15:58:35+00:00",
+    "translations": {
+         "fr": "je suis une phrase",
+         "es": "soy una frase"
+    }
   }
 ]
