@@ -10,7 +10,7 @@ The project is setup as a monorepository, which means the project consists of in
 - `packages/common`: A library that is shared between the API and the web application.
 - `packages/web`: A web application to allow users to view and search phrases.
 
-** Update after finishing the API + sorting + unit tests: The frontend was unable to be created since I set a hard stop after a few hours. If I had extra time, I would've created the frontend using React with TypeScript and Tailwind for styling. I would've created a custom hook to handle interactions with the API, integrating the types from `packages/common`. An alternative to a custom hook would be using a library such as `@tanstack/query` which has the benefit of a built-in caching mechanism and query invalidation.
+** Update after finishing the API + sorting + unit tests: The frontend was unable to be created since I set a hard stop after a few hours. If I had extra time, I would've created the frontend using React with TypeScript and Tailwind for styling. I would've created a custom hook to handle interactions with the API, integrating the types from `packages/common`. An alternative to a custom hook would be using a library such as `@tanstack/react-query` which has the benefit of a built-in caching mechanism and query invalidation, as well as debouncing to prevent every change in the search bar from sending a new query.
 
 *Note: In a production application, each package would have their own git repository and be tracked as a git submodule within the monorepository. For time sake, I will be leaving that out.*
 
