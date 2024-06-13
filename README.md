@@ -47,3 +47,32 @@ The API contains unit tests using [Jest](https://jestjs.io/)
 
 - Run the tests with `cd packages/api && yarn test`
 
+## API Endpoints
+
+### Get Phrase by ID
+Retrieves a phrase object by its ID, without the translations
+
+  - GET `/phrase/:id`
+
+**Query Parameters:**
+  - `id` (int): The ID of the phrase object
+
+### Get Phrase Translation by Language
+
+Retrieves the translation of a phrase in a specific language.
+
+  - GET `/phrase/:id/:language`
+
+**Query Parameters:**
+  - `id` (int): The ID of the phrase object
+  - `language` (string): The key of the language for the translations (e.g. `es` or `fr`)
+
+### Get Phrases by Search
+
+Retrieves phrases that match a search query and are sorted according to a specified sort order.
+
+  - GET `/phrase/search`
+
+**Query Parameters:**
+  - `query` (string, optional): The search query for phrases.
+  - `sort` (string, optional): The sort order in the format `key:asc|desc`, where `key` can be one of `phrase`, `status`, `createdAt`, or `updatedAt`.
