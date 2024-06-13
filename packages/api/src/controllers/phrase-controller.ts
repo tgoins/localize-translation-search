@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import PhraseService from '../services/phrase-service';
-import {Phrase} from 'localize-translation-search-common'
 
 class PhraseController {
   constructor(private phraseService: PhraseService, router: express.Router) {
@@ -63,14 +62,14 @@ class PhraseController {
       const query = req.query.query as string | undefined;
       const sort = req.query.sort as string | undefined;
       let sortOrder: 'asc' | 'desc' | undefined;
-      let sortKey: keyof Phrase | undefined;
+      let sortKey: 'phrase' | 'status' | 'createdAt' | 'updatedAt' | undefined;
 
       if (sort) {
         if (!sort.includes(':')) {
           return res.status(400).json({ error: 'Invalid sort format' });
         }
 
-        sortKey = sort.split(':')[0] as keyof Phrase;
+        sortKey = sort.split(':')[0] as 'phrase' | 'status' | 'createdAt' | 'updatedAt';
         sortOrder = sort.split(':')[1] as 'asc' | 'desc';
 
         if ([ 'phrase', 'status', 'createdAt', 'updatedAt' ].indexOf(sortKey) === -1) {
