@@ -20,22 +20,28 @@ The project requires the following tools to run:
 
 - [Node.js](https://nodejs.org) - Node.js is the runtime environment for the application.
 - [Yarn](https://yarnpkg.com/getting-started) - Yarn is a package manager which natively supports monorepositories.
+- [Corepack](https://yarnpkg.com/corepack) - This is included with Node.js but might not be enabled:
+  - Open a terminal and run `corepack enable`
 
-## Setup
+## Running the application
 
-1. Enable [Corepack](https://yarnpkg.com/corepack) if not yet enabled (This is included with Node.js):
-  - Open a terminal and run `corepack enable` 
-
-2. Install the dependencies:
+1. Install the dependencies:
   - In a terminal, run `yarn install`
 
-3. Build the `common` package:
+2. Build the `common` package:
   - In a terminal, run `cd packages/common && yarn build`
 
-4. Run the API:
+3. Run the API:
   - In a terminal, run `cd packages/api`
   - For development:
     - Run `yarn dev`
   - For production:
     - Run `yarn build && yarn start`
   - The API should now be running at `http://locahost:3000`
+
+## Running the tests
+
+The API contains unit tests using [Jest](https://jestjs.io/)
+
+- Run the tests with `cd packages/api && yarn test`
+
