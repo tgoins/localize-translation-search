@@ -106,6 +106,17 @@ describe('PhraseService', () => {
       expect(result).toEqual(expectedPhrases);
     });
 
+    it('should return phrases that match the query case-insensitive', async () => {
+      const query = 'HELLO';
+      const expectedPhrases = [{ id: 1, phrase: 'Hello' }];
+
+      jest.spyOn(fs.promises, 'readFile').mockResolvedValue(JSON.stringify([{ id: 1, phrase: 'Hello' }, { id: 2, phrase: 'Goodbye' }]));
+
+      const result = await phraseService.getPhrasesBySearch(query);
+
+      expect(result).toEqual(expectedPhrases);
+    });
+
     it('should return an empty array when no phrases match the query', async () => {
       const query = 'test';
 
